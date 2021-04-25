@@ -30,3 +30,4 @@ class OrderDetails(BaseModel):
     datestamp: str
     itemInfo: List[ItemDetails]
     status: OrderStatus
+    customerName: Optional[str]
