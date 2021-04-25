@@ -5,9 +5,13 @@ from pydantic import BaseModel
 from src.entities.order_entities import Item, Toppings, OrderDetails
 
 
-class PlaceOrderRequestModel(BaseModel):
+class OrderDetailsRequestModel(BaseModel):
     item: Item
     toppings: Optional[List[Toppings]]
+
+
+class PlaceOrderRequestModel(BaseModel):
+    orders: Optional[List[OrderDetailsRequestModel]]
 
 
 class PlaceOrderResponseModel(BaseModel):

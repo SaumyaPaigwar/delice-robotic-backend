@@ -20,9 +20,13 @@ class Item(BaseModel):
     itemPrice: float
 
 
+class ItemDetails(BaseModel):
+    item: Item
+    toppings: Optional[List[Toppings]]
+
+
 class OrderDetails(BaseModel):
     orderNumber: int
     datestamp: str
-    item: Item
-    toppings: Optional[List[Toppings]]
+    itemInfo: List[ItemDetails]
     status: OrderStatus

@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import List
 
 from src.configs.constants import ORDER_FILE_PATH, ORDERS
-from src.entities.order_entities import OrderDetails, OrderStatus
+from src.entities.order_entities import OrderDetails, OrderStatus, ItemDetails
 from src.models.api_models import PlaceOrderRequestModel, PlaceOrderResponseModel
 
 
@@ -47,15 +47,16 @@ def _save_order_requests(order_request: PlaceOrderRequestModel) -> int:
     with open(ORDER_FILE_PATH) as f:
         order_details = json.loads(f.read())
     orders = order_details.get("orders") if "orders" in order_details else []
+    item_info = []
+    for order in order_request.orders:
+        item_info.append(ItemDetails(item=order.item,
+                                     toppings=order.toppings))
+
     orders.append(OrderDetails(orderNumber=order_number,
                                datestamp=str(datetime.now()),
-                               item=order_request.item,
-                               toppings=order_request.toppings,
+                               itemInfo=item_info,
                                status=OrderStatus.INITIATED).dict())
     _update_orders(orders)
-    # order_details["orders"] = orders
-    # with open(ORDER_FILE_PATH, 'w') as f:
-    #     json.dump(order_details, f)
     return order_number
 
 
