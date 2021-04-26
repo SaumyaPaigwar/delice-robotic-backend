@@ -31,3 +31,4 @@ class OrderDetails(BaseModel):
     itemInfo: List[ItemDetails]
     status: OrderStatus
     customerName: Optional[str]
+    totalPrice: float

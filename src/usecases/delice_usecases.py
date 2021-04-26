@@ -56,7 +56,8 @@ def _save_order_requests(order_request: PlaceOrderRequestModel) -> int:
                                datestamp=str(datetime.now()),
                                itemInfo=item_info,
                                status=OrderStatus.INITIATED,
-                               customerName=order_request.customerName).dict())
+                               customerName=order_request.customerName,
+                               totalPrice=order_request.totalPrice).dict())
     _update_orders(orders)
     return order_number
 

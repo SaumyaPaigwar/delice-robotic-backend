@@ -12,6 +12,7 @@ class OrderDetailsRequestModel(BaseModel):
 
 class PlaceOrderRequestModel(BaseModel):
     orders: Optional[List[OrderDetailsRequestModel]]
+    totalPrice: float
     customerName: Optional[str]
 
 
